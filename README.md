@@ -1,6 +1,7 @@
 
-
+This repo contains the implementation of our paper:
 Non-Autoregressive Translation with Layer-Wise Prediction and Deep Supervision
+[Arxiv Link](https://arxiv.org/abs/2110.07515)
 
 ## Training Efficiency
 We show the training efficiency of our DSLP model based on vanilla NAT model. Specifically, we compared the BLUE socres of vanilla NAT and vanilla NAT with DSLP & Mixed Training on the same traning time (in hours). 

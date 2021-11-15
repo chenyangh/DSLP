@@ -28,6 +28,19 @@ python3 fairseq_cli/preprocess.py --source-lang en --target-lang de \
    --destdir data-bin/wmt14.en-de_kd --workers 40 --joined-dictionary
 ```
 
+### Python environment
+```
+pip install -e . # under DSLP directory
+git clone --recursive https://github.com/parlance/ctcdecode.git
+cd ctcdecode && pip install .
+cd ..
+pip install git+https://github.com/dugu9sword/lunanlp.git
+pip install tensorflow tensorboard sacremoses nltk Ninja omegaconf
+pip install 'fuzzywuzzy[speedup]'
+pip install hydra-core==1.0.6
+pip install sacrebleu==1.5.1
+```
+
 ### Training:
 
 GLAT with DSLP
@@ -39,7 +52,7 @@ python3 train.py data-bin/wmt14.en-de_kd --source-lang en --target-lang de  --sa
    --share-all-embeddings --decoder-learned-pos --encoder-learned-pos  --optimizer adam --adam-betas "(0.9,0.98)" --lr 0.0005 \ 
    --lr-scheduler inverse_sqrt --stop-min-lr 1e-09 --warmup-updates 10000 --warmup-init-lr 1e-07 --apply-bert-init --weight-decay 0.01 \
    --fp16 --clip-norm 2.0 --max-update 300000  --task translation_glat --criterion glat_loss --arch glat_sd --noise full_mask \ 
-   --src-upsample-scale 2 --use-ctc-decoder --ctc-beam-size 1  --concat-yhat --concat-dropout 0.0  --label-smoothing 0.1 \ 
+   --concat-yhat --concat-dropout 0.0  --label-smoothing 0.1 \ 
    --activation-fn gelu --dropout 0.1  --max-tokens 8192 --glat-mode glat 
 ```
 
@@ -52,7 +65,7 @@ python3 train.py data-bin/wmt14.en-de_kd --source-lang en --target-lang de  --sa
    --share-all-embeddings --decoder-learned-pos --encoder-learned-pos  --optimizer adam --adam-betas "(0.9,0.98)" --lr 0.0005 \ 
    --lr-scheduler inverse_sqrt --stop-min-lr 1e-09 --warmup-updates 10000 --warmup-init-lr 1e-07 --apply-bert-init --weight-decay 0.01 \
    --fp16 --clip-norm 2.0 --max-update 300000  --task translation_lev --criterion nat_loss --arch glat_sd --noise full_mask \ 
-   --src-upsample-scale 2 --use-ctc-decoder --ctc-beam-size 1  --concat-yhat --concat-dropout 0.0  --label-smoothing 0.1 \ 
+   --concat-yhat --concat-dropout 0.0  --label-smoothing 0.1 \ 
    --activation-fn gelu --dropout 0.1  --max-tokens 8192 
 ```
 
@@ -65,7 +78,7 @@ python3 train.py data-bin/wmt14.en-de_kd --source-lang en --target-lang de  --sa
    --share-all-embeddings --decoder-learned-pos --encoder-learned-pos  --optimizer adam --adam-betas "(0.9,0.98)" --lr 0.0005 \ 
    --lr-scheduler inverse_sqrt --stop-min-lr 1e-09 --warmup-updates 10000 --warmup-init-lr 1e-07 --apply-bert-init --weight-decay 0.01 \
    --fp16 --clip-norm 2.0 --max-update 300000  --task translation_lev --criterion nat_loss --arch nat_sd --noise full_mask \ 
-   --src-upsample-scale 2 --use-ctc-decoder --ctc-beam-size 1  --concat-yhat --concat-dropout 0.0  --label-smoothing 0.1 \ 
+   --concat-yhat --concat-dropout 0.0  --label-smoothing 0.1 \ 
    --activation-fn gelu --dropout 0.1  --max-tokens 8192 
 ```
 
@@ -78,7 +91,7 @@ python3 train.py data-bin/wmt14.en-de_kd --source-lang en --target-lang de  --sa
    --share-all-embeddings --decoder-learned-pos --encoder-learned-pos  --optimizer adam --adam-betas "(0.9,0.98)" --lr 0.0005 \ 
    --lr-scheduler inverse_sqrt --stop-min-lr 1e-09 --warmup-updates 10000 --warmup-init-lr 1e-07 --apply-bert-init --weight-decay 0.01 \
    --fp16 --clip-norm 2.0 --max-update 300000  --task translation_lev --criterion nat_loss --arch nat_sd --noise full_mask \ 
-   --src-upsample-scale 2 --use-ctc-decoder --ctc-beam-size 1  --concat-yhat --concat-dropout 0.0  --label-smoothing 0.1 \ 
+   --concat-yhat --concat-dropout 0.0  --label-smoothing 0.1 \ 
    --activation-fn gelu --dropout 0.1  --max-tokens 8192  --ss-ratio 0.3 --fixed-ss-ratio --masked-loss
 ```
 

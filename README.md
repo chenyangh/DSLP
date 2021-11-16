@@ -5,28 +5,8 @@ Non-Autoregressive Translation with Layer-Wise Prediction and Deep Supervision
 
 [Paper Link](https://arxiv.org/abs/2110.07515)
 
-## Training Efficiency
-We show the training efficiency of our DSLP model based on vanilla NAT model. Specifically, we compared the BLUE socres of vanilla NAT and vanilla NAT with DSLP & Mixed Training on the same traning time (in hours). 
-
-As we observed, our DSLP model achieves much higher BLUE scores shortly after the training started (~3 hours). It shows that our DSLP is much more efficient in training, as our model ahieves higher BLUE scores with the same amount of training cost.
-
-![Efficiency](docs/efficiency.png)
-
-We run the experiments with 8 Tesla V100 GPUs. The batch size is 128K tokens, and each model is trained with 300K updates.
-
 ## Replication  
 We provide the scripts of replicating the results on WMT'14 EN-DE task.
-
-### Dataset
-We download the distilled data from [FairSeq](http://dl.fbaipublicfiles.com/nat/distill_dataset.zip)
-
-Preprocessed by 
-```
-TEXT=wmt14_ende_distill
-python3 fairseq_cli/preprocess.py --source-lang en --target-lang de \
-   --trainpref $TEXT/train.en-de --validpref $TEXT/valid.en-de --testpref $TEXT/test.en-de \
-   --destdir data-bin/wmt14.en-de_kd --workers 40 --joined-dictionary
-```
 
 ### Python environment
 ```
@@ -39,6 +19,19 @@ pip install git+https://github.com/dugu9sword/lunanlp.git
 git clone --recursive https://github.com/parlance/ctcdecode.git
 cd ctcdecode && pip install .
 ```
+
+### Dataset
+We download the distilled data from [FairSeq](http://dl.fbaipublicfiles.com/nat/distill_dataset.zip)
+
+Preprocessed by 
+```
+TEXT=wmt14_ende_distill
+python3 fairseq_cli/preprocess.py --source-lang en --target-lang de \
+   --trainpref $TEXT/train.en-de --validpref $TEXT/valid.en-de --testpref $TEXT/test.en-de \
+   --destdir data-bin/wmt14.en-de_kd --workers 40 --joined-dictionary
+```
+
+
 
 ### Training:
 
@@ -129,9 +122,6 @@ fairseq-generate data-bin/wmt14.en-de_kd  --path PATH_TO_A_CHECKPOINT \
 ```
 **Note**: 1) Add `--plain-ctc --model-overrides '{"ctc_beam_size": 1, "plain_ctc": True}'` if it is CTC based; 2) Change the task to `translation_glat` if it is GLAT based.
 
-
-
-
 ## Output
 
 We in addition provide the output of CTC w/ DSLP, CTC w/ DSLP & Mixed Training, Vanilla NAT w/ DSLP, Vanilla NAT w/ DSLP with Mixed Training, GLAT w/ DSLP, and CMLM w/ DSLP for review purpose.
@@ -146,3 +136,13 @@ We in addition provide the output of CTC w/ DSLP, CTC w/ DSLP & Mixed Training, 
 | CMLM w/ DSLP | [ref](output/cmlm_sd.ref) | [hyp](output/cmlm_sd.hyp)  |  
 
 **Note**: The output is on WMT'14 EN-DE. The references are paired with hypotheses for each model. 
+
+
+## Training Efficiency
+We show the training efficiency of our DSLP model based on vanilla NAT model. Specifically, we compared the BLUE socres of vanilla NAT and vanilla NAT with DSLP & Mixed Training on the same traning time (in hours). 
+
+As we observed, our DSLP model achieves much higher BLUE scores shortly after the training started (~3 hours). It shows that our DSLP is much more efficient in training, as our model ahieves higher BLUE scores with the same amount of training cost.
+
+![Efficiency](docs/efficiency.png)
+
+We run the experiments with 8 Tesla V100 GPUs. The batch size is 128K tokens, and each model is trained with 300K updates.

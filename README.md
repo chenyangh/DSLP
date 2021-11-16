@@ -6,7 +6,7 @@ Non-Autoregressive Translation with Layer-Wise Prediction and Deep Supervision
 [Paper Link](https://arxiv.org/abs/2110.07515)
 
 ## Replication  
-We provide the scripts of replicating the results on WMT'14 EN-DE task.
+We provide the scripts for replicating the results on WMT'14 EN-DE task.
 
 ### Python environment
 ```
@@ -21,7 +21,7 @@ cd ctcdecode && pip install .
 ```
 
 ### Dataset
-We download the distilled data from [FairSeq](http://dl.fbaipublicfiles.com/nat/distill_dataset.zip)
+We downloaded the distilled data from [FairSeq](http://dl.fbaipublicfiles.com/nat/distill_dataset.zip)
 
 Preprocessed by 
 ```
@@ -30,7 +30,6 @@ python3 fairseq_cli/preprocess.py --source-lang en --target-lang de \
    --trainpref $TEXT/train.en-de --validpref $TEXT/valid.en-de --testpref $TEXT/test.en-de \
    --destdir data-bin/wmt14.en-de_kd --workers 40 --joined-dictionary
 ```
-
 
 
 ### Training:

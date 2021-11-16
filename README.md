@@ -44,7 +44,8 @@ python3 train.py data-bin/wmt14.en-de_kd --source-lang en --target-lang de  --sa
    --lr-scheduler inverse_sqrt --stop-min-lr 1e-09 --warmup-updates 10000 --warmup-init-lr 1e-07 --apply-bert-init --weight-decay 0.01 \
    --fp16 --clip-norm 2.0 --max-update 300000  --task translation_glat --criterion glat_loss --arch glat_sd --noise full_mask \ 
    --concat-yhat --concat-dropout 0.0  --label-smoothing 0.1 \ 
-   --activation-fn gelu --dropout 0.1  --max-tokens 8192 --glat-mode glat 
+   --activation-fn gelu --dropout 0.1  --max-tokens 8192 --glat-mode glat \ 
+   --length-loss-factor 0.1 --pred-length-offset 
 ```
 
 CMLM with DSLP
@@ -57,7 +58,8 @@ python3 train.py data-bin/wmt14.en-de_kd --source-lang en --target-lang de  --sa
    --lr-scheduler inverse_sqrt --stop-min-lr 1e-09 --warmup-updates 10000 --warmup-init-lr 1e-07 --apply-bert-init --weight-decay 0.01 \
    --fp16 --clip-norm 2.0 --max-update 300000  --task translation_lev --criterion nat_loss --arch glat_sd --noise full_mask \ 
    --concat-yhat --concat-dropout 0.0  --label-smoothing 0.1 \ 
-   --activation-fn gelu --dropout 0.1  --max-tokens 8192 
+   --activation-fn gelu --dropout 0.1  --max-tokens 8192 \
+   --length-loss-factor 0.1 --pred-length-offset 
 ```
 
 Vanilla NAT with DSLP
@@ -70,7 +72,8 @@ python3 train.py data-bin/wmt14.en-de_kd --source-lang en --target-lang de  --sa
    --lr-scheduler inverse_sqrt --stop-min-lr 1e-09 --warmup-updates 10000 --warmup-init-lr 1e-07 --apply-bert-init --weight-decay 0.01 \
    --fp16 --clip-norm 2.0 --max-update 300000  --task translation_lev --criterion nat_loss --arch nat_sd --noise full_mask \ 
    --concat-yhat --concat-dropout 0.0  --label-smoothing 0.1 \ 
-   --activation-fn gelu --dropout 0.1  --max-tokens 8192 
+   --activation-fn gelu --dropout 0.1  --max-tokens 8192 \
+   --length-loss-factor 0.1 --pred-length-offset 
 ```
 
 Vanilla NAT with DSLP and Mixed Training:
@@ -83,7 +86,8 @@ python3 train.py data-bin/wmt14.en-de_kd --source-lang en --target-lang de  --sa
    --lr-scheduler inverse_sqrt --stop-min-lr 1e-09 --warmup-updates 10000 --warmup-init-lr 1e-07 --apply-bert-init --weight-decay 0.01 \
    --fp16 --clip-norm 2.0 --max-update 300000  --task translation_lev --criterion nat_loss --arch nat_sd --noise full_mask \ 
    --concat-yhat --concat-dropout 0.0  --label-smoothing 0.1 \ 
-   --activation-fn gelu --dropout 0.1  --max-tokens 8192  --ss-ratio 0.3 --fixed-ss-ratio --masked-loss
+   --activation-fn gelu --dropout 0.1  --max-tokens 8192  --ss-ratio 0.3 --fixed-ss-ratio --masked-loss \ 
+   --length-loss-factor 0.1 --pred-length-offset 
 ```
 
 CTC with DSLP:

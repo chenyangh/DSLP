@@ -6,7 +6,6 @@ Non-Autoregressive Translation with Layer-Wise Prediction and Deep Supervision
 [Paper Link](https://arxiv.org/abs/2110.07515)
 
 ## Replication  
-We provide the scripts for replicating the results on WMT'14 EN-DE task.
 
 ### Python environment
 ```
@@ -30,9 +29,22 @@ python3 fairseq_cli/preprocess.py --source-lang en --target-lang de \
    --trainpref $TEXT/train.en-de --validpref $TEXT/valid.en-de --testpref $TEXT/test.en-de \
    --destdir data-bin/wmt14.en-de_kd --workers 40 --joined-dictionary
 ```
+Or you can download all the binarized files [here](https://drive.google.com/file/d/1MUNYkH5Cf2LC6Zv1Q01VorbNQlrLYOPk/view?usp=sharing).
 
+## Hyperparameters
+|                             	| EN<->RO 	| EN<->DE 	|
+|-----------------------------	|---------	|---------	|
+| --validate-interval-updates 	| 300     	| 500     	|
+| number of tokens per batch  	| 32K     	| 128K    	|
+| --dropout                   	| 0.3     	| 0.1     	|
+
+**Note:**
+1. We found that label smoothing for CTC-based models are not useful (at least not with our implementation), it is suggested to keep `--label-smoothing` as 0 for them. 
+2. Dropout rate plays a significant role for GLAT, CMLM, and the Vanilla NAT. On WMT'14 EN->De, for example, the Vanilla NAT with dropout 0.1 reaches 21.18 BLEU; but only gives 19.68 BLEU with dropout 0.3. 
 
 ### Training:
+We provide the scripts for replicating the results on WMT'14 EN->DE task. For other tasks, you need to adapt the binary path, `--source-lang`, `--target-lang`, and some other hyperparameters accordingly. 
+
 
 GLAT with DSLP
 ```bash

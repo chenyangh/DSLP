@@ -130,6 +130,8 @@ python3 train.py data-bin/wmt14.en-de_kd --source-lang en --target-lang de  --sa
 
 
 ### Evaluation
+Average the last best 5 checkpoints with `scripts/average_checkpoints.py`, our results are based on either the best checkpoint or the averaged checkpoint, depending on their `valid` set BLEU.
+
 ```bash
 fairseq-generate data-bin/wmt14.en-de_kd  --path PATH_TO_A_CHECKPOINT \
     --gen-subset test --task translation_lev --iter-decode-max-iter 0 \

@@ -21,7 +21,6 @@ from .nat_sd_shared import *  # Note: redundant remove in the future.
 from .nat_s import *
 from .nat_d import *
 from .nat_ctc import *
-from .ctc_from_zaixiang import *
 from .cmlm_sd import *
 from .nat_cf import *
 from .nat_sd_ss import *

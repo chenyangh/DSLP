@@ -17,19 +17,13 @@ from .nat_sd import *
 from .nat_ctc_sd import *
 from .nat_ctc_s import *
 from .nat_ctc_d import *
-from .nat_glat_sd import *
-from .nat_glat_s import *
-from .nat_glat_d import *
 from .nat_sd_shared import *  # Note: redundant remove in the future.
 from .nat_s import *
 from .nat_d import *
-from .nat_sd_glat_anneal import *
 from .nat_ctc import *
 from .ctc_from_zaixiang import *
 from .cmlm_sd import *
 from .nat_cf import *
-from .nat_md import *
 from .nat_sd_ss import *
-from .nat_glat_sd_ss import *
 from .nat_ctc_sd_ss import *
 from .cmlm_sd_ss import *

@@ -26,3 +26,5 @@ from .nat_cf import *
 from .nat_sd_ss import *
 from .nat_ctc_sd_ss import *
 from .cmlm_sd_ss import *
+from .nat_glat_sd import *
+
